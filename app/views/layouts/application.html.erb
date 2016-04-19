@@ -7,8 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
+  <%= render "layouts/navbar" %>
 
-<%= yield %>
+  <%= content_tag(:div, flash[:error], id: "flash_error", class: "container") if flash[:error] %> 
+  <%= content_tag(:div, flash[:notice], id: "flash_notice", class: "container") if flash[:notice] %> 
+  <%= content_tag(:div, flash[:alert], id: "flash_alert", class: "container") if flash[:alert] %>
+  
+  <div class="container">
+    <%= yield %>  
+  </div>
 
 </body>
 </html>

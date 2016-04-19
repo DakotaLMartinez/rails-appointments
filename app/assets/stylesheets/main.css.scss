@@ -1,0 +1,55 @@
+$link-color: blue;
+$link-hover-color: lighten($link-color, 55);
+$nav-color: #FFC970;
+$menu-item-background-color: $nav-color;
+$menu-item-hover-background-color: darken($nav-color, 15);
+
+body {
+  margin: 0; 
+  padding: 0;
+}
+.container {
+  width: 85%; 
+  margin: 0 auto;
+}
+nav {
+  background: $nav-color;
+}
+.main-menu {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style:none;
+  li {
+    display: inline-block;
+    padding: 0;
+    margin-right: -4px;
+    transition: background 0.3s ease;
+    background: $menu-item-background-color;
+  }
+  li:first-child {
+    border-left: 1px solid $menu-item-hover-background-color;
+  }
+  li:hover {
+    background: $menu-item-hover-background-color;
+  }
+  a, a:visited {
+    text-decoration: none;
+    color: $link-color;
+    box-sizing: border-box;
+    padding: 20px 30px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    color: $link-hover-color;
+  }
+  .right {
+    float: right;
+    a {
+      padding: 20px 15px;
+    }
+  }
+}

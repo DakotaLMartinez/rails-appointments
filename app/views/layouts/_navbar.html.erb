@@ -1,0 +1,15 @@
+<nav>
+  <div class="container">
+    <ul class="main-menu">
+      <li><%= link_to "Home", root_path %></li> 
+      <li><%= link_to "About", about_path %></li>
+    <% if user_signed_in? %>
+      <li class="right"><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+    <% else %>
+      <li class="right"><%= link_to "Sign in", new_user_session_path %></li>
+      <li class="right"><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></li>
+      <li class="right"><%= link_to "Sign up", new_user_registration_path %></li>
+    <% end %>
+    </ul>
+  </div>
+</nav>
