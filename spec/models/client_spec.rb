@@ -49,5 +49,42 @@ RSpec.describe Client, type: :model do
     
   end
   
+  context "validations" do 
+    
+    it "must have a name, but phone number and email are optional" do 
+      new_client = Client.new(name: "", user_id: sandra.id)
+      expect(new_client).not_to be_valid 
+      
+      named_client = Client.new(name: "ihave aname", user_id: sandra.id)
+      expect(named_client).to be_valid
+    end
+    
+    it "only accepts valid email addresses" do 
+      new_client = Client.new(name: "newclient", email: "myemail", user_id: sandra.id)
+      expect(new_client).not_to be_valid
+      
+      valid_client = Client.new(name: "newclient", email: "myemail@gmail.com", user_id: sandra.id)
+      expect(valid_client).to be_valid
+    end
+    
+    it "only accepts valid phone numbers" do 
+      new_client = Client.new(name: "newclient", phone_number: "111 182 12", user_id: sandra.id)
+      expect(new_client).not_to be_valid 
+      
+      valid_client = Client.new(name: "newclient", phone_number: "(123) 456-7890", user_id: sandra.id)
+      expect(valid_client).to be_valid
+    end
+    
+    it "is valid only when associated with an existing user" do 
+      new_client = Client.new(name: "newclient", user_id: 99999999999 )
+      expect(new_client).not_to be_valid
+      
+      valid_client = Client.new(name: "newclient", user_id: sandra.id)
+      expect(valid_client).to be_valid
+      
+    end
+    
+  end
+  
 end
 
