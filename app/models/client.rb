@@ -21,7 +21,7 @@ class Client < ActiveRecord::Base
     end
   end
   
-  validates_with UserIdValidator
+  # validates_with UserIdValidator
   
   ##
   

@@ -53,3 +53,14 @@ nav {
     }
   }
 }
+
+h1 a {
+    background: blue;
+    color: white;
+    text-decoration: none;
+    border-radius: 26px;
+    padding: 2px 8px;
+    font-size: 60%;
+    position: relative;
+    top: -5px;
+}
