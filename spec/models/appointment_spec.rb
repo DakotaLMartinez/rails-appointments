@@ -51,4 +51,21 @@ RSpec.describe Appointment, type: :model do
     
   end 
   
+  context "associations" do 
+    
+    it "belongs to a location" do 
+      expect(appointment1.location).to eq(santa_monica)
+    end
+    
+    it "belongs to a client" do 
+      expect(appointment1.client).to eq(axel)
+    end
+    
+    it "belongs to a user" do 
+      expect(appointment1.user).to eq(sandra)
+    end
+    
+  end 
+  
+  
 end
