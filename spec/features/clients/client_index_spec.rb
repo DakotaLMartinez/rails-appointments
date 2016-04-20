@@ -13,10 +13,10 @@ feature 'Client Index', :devise do
     signin(user.email, user.password)
     visit new_client_path 
     fill_in 'client_name', with: "my new client"
-    click_button 'Save'
+    click_button 'Create Client'
     visit new_client_path
     fill_in 'client_name', with: "my second client"
-    click_button 'Save' 
+    click_button 'Create Client' 
     visit clients_path 
     expect(page).to have_content('my new client')
     expect(page).to have_content('my second client')
@@ -29,7 +29,7 @@ feature 'Client Index', :devise do
     signin(other_user.email, other_user.password)
     visit new_client_path 
     fill_in 'client_name', with: "my private client"
-    click_button 'Save'
+    click_button 'Create Client'
     click_link "Sign out"
     signin(user.email, user.password)
     visit clients_path

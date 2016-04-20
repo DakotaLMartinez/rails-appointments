@@ -8,7 +8,7 @@ feature "Client Edit", :devise do
     new_client = user.clients.create(name: "my new client")
     visit edit_client_path(new_client)
     fill_in "client_name", with: "my super cool new client"
-    click_button "Save"
+    click_button "Update Client"
     expect(page.current_path).to eq(client_path(new_client))
     expect(page).to have_content('my super cool new client')
   end
@@ -20,7 +20,7 @@ feature "Client Edit", :devise do
     new_client = user.clients.create(name: "my new client")
     visit edit_client_path(new_client)
     fill_in "client_name", with: "my super cool new client"
-    click_button "Save"
+    click_button "Update Client"
     click_link "Sign out" 
     signin(other_user.email, other_user.password)
     visit edit_client_path(new_client)

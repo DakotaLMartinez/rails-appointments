@@ -15,13 +15,14 @@ class Client < ActiveRecord::Base
     def validate(record)
       if User.find_by(id: record.user_id)
         record.errors.delete :user_id
-      else User.find_by(id: record.user_id)
+      end
+      if record.user_id && User.find_by(id: record.user_id).nil?
         record.errors[:user_id] << "User not found."
       end
     end
   end
   
-  # validates_with UserIdValidator
+  validates_with UserIdValidator
   
   ##
   
