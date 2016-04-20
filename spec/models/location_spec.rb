@@ -28,6 +28,32 @@ RSpec.describe Location, type: :model do
     it "has a business name" do 
       expect(santa_monica.business_name).to eq("Santa Monica Music Center")
     end
+    
+  end
+  
+  context "associations" do 
+    
+    let(:tomorrow_at_ten) { DateTime.now.midnight + 34.hours }
+    let(:two_days_later) { DateTime.now.midnight + 59.hours }
+    
+    let(:sandra) { User.find_by(email: "sandra@sandra.com") || User.create(email: "sandra@sandra.com", password: "sandrapass") }
+    
+    let(:axel) { Client.find_or_create_by(name: "Axel", phone_number: "(999) 999-9999", email: "axel@gmail.com", user_id: sandra.id) }
+    let(:randy) { Client.find_or_create_by(name: "Randy", phone_number: "(444) 456-8172", email: "randydandy@hotmail.com", user_id: sandra.id) }
+    
+    let(:appointment1) { Appointment.find_or_create_by( appointment_time: two_days_later, duration: 3600, price: 80, location_id: santa_monica.id, client_id: axel.id, user_id: sandra.id) }
+    let(:appointment4) { Appointment.find_or_create_by( appointment_time: tomorrow_at_ten, duration: 3600, price: 80, location_id: santa_monica.id, client_id: randy.id, user_id: sandra.id) }
+    
+    it "has many appointments" do
+      [appointment1, appointment4]
+      expect(santa_monica.appointments).to include(appointment1, appointment4)
+    end
+    
+    it "has many clients through appointments" do 
+      [appointment1, appointment4]
+      expect(santa_monica.clients).to include(axel, randy)
+    end
+    
   end
   
 end
