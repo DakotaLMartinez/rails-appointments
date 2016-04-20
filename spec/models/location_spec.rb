@@ -56,4 +56,15 @@ RSpec.describe Location, type: :model do
     
   end
   
+  context "validations" do 
+  
+    let(:valid_attributes) { { nickname: "Santa Monica Music", city: "Santa Monica", street_address: "1901 Santa Monica Blvd", state: "CA", zipcode: "90404", business_name: "Santa Monica Music Center" } }
+    
+    it "must have a nickname" do 
+      missing_nickname = Location.new( valid_attributes.merge(nickname: "") )
+      expect(missing_nickname).not_to be_valid
+    end
+    
+  end
+  
 end
