@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420012114) do
+ActiveRecord::Schema.define(version: 20160420012901) do
+
+  create_table "appointments", force: :cascade do |t|
+    t.datetime "appointment_time"
+    t.integer  "duration",         limit: 4
+    t.float    "price",            limit: 24
+    t.integer  "location_id",      limit: 4
+    t.integer  "user_id",          limit: 4
+    t.integer  "client_id",        limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "appointments", ["client_id"], name: "index_appointments_on_client_id", using: :btree
+  add_index "appointments", ["location_id"], name: "index_appointments_on_location_id", using: :btree
+  add_index "appointments", ["user_id"], name: "index_appointments_on_user_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -57,4 +72,7 @@ ActiveRecord::Schema.define(version: 20160420012114) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
+  add_foreign_key "appointments", "clients"
+  add_foreign_key "appointments", "locations"
+  add_foreign_key "appointments", "users"
 end
