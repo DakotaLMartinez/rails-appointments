@@ -67,5 +67,34 @@ RSpec.describe Appointment, type: :model do
     
   end 
   
+  context "validations" do 
+    
+    it "must have a duration" do 
+      no_duration = Appointment.new( valid_attributes.merge(duration: "") )
+      expect(no_duration).not_to be_valid
+    end
+    
+    it "must have an appointment time" do 
+      no_time = Appointment.new( valid_attributes.merge(appointment_time: "") )
+      expect(no_time).not_to be_valid
+    end
+    
+    it "if it has a price, it must be a positive float" do 
+      wrong_price = Appointment.new( valid_attributes.merge(price: -40.0) )
+      expect(wrong_price).not_to be_valid
+      no_price = Appointment.new( valid_attributes.merge(price: "") )
+      expect(no_price).to be_valid
+      
+    end
+    
+    it "cannot book an appointment on top of another appointment" do 
+      Appointment.create(valid_attributes)
+      half_an_hour_later = two_days_later + 30.minutes
+      conflicting_appointment = Appointment.new( valid_attributes.merge(appointment_time: half_an_hour_later))
+      expect(conflicting_appointment).not_to be_valid
+    end
+    
+  end
+  
   
 end
