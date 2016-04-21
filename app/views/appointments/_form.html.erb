@@ -1,0 +1,24 @@
+<%= form_for appointment do |f| %>
+  <p>
+    <%= label_tag :client %>
+    <%= collection_select :appointment, :client_id, current_user.clients, :id, :name %>
+  </p>
+  <p>
+    <label>Or create a new client: </label> 
+    <%= fields_for :client do |ff| %> 
+      <%= ff.text_field :name %>
+    <% end %>
+  </p>
+  <p>
+    <%= label_tag "appointment[appointment_time][date]", "Date: " %>
+    <%= date_field_tag "appointment[appointment_time][date]", appointment.date %>
+  </p>
+  <p id="time">
+    <%= label_tag "appointment[appointment_time][hour]", "Time: " %>
+    <%= hour_selector("appointment[appointment_time][hour]") %> : 
+    <%= min_selector("appointment[appointment_time][min]") %> 
+  </p>
+  <p><%= f.label :duration %>: <%= duration_field("appointment[duration]") %></p>
+  <p><%= f.label :price %>: <%= f.number_field :price %></p>
+  <p><%= f.submit %></p>
+<% end %>

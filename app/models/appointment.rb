@@ -3,9 +3,29 @@ class Appointment < ActiveRecord::Base
   belongs_to :user
   belongs_to :client
   
+  def date
+    
+  end
+  
+  def client_name 
+    client.name
+  end
+  
+  def location_name 
+    location.nickname
+  end
+  
+  def appointment_time=(time)
+    write_attribute(:appointment_time, parse_time(time) )
+  end
+  
+  def parse_time(hash)
+    DateTime.parse(hash["date"] + " " + hash["hour"] + ":" + hash["min"])
+  end
+  
   ## Validations 
   
-  validates :duration, presence: true
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :appointment_time, presence: true 
   validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true 
   
