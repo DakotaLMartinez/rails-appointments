@@ -59,7 +59,7 @@ class AppointmentsController < ApplicationController
   
   def appointment_params
     time_keys = params[:appointment].try(:fetch, :appointment_time, {}).keys
-    params.require(:appointment).permit(:client_id, :duration, :price, appointment_time: time_keys)
+    params.require(:appointment).permit(:client_id, :duration, :price, :location_id, location_attributes: [:nickname], appointment_time: time_keys)
   end
   
   def new_client_params

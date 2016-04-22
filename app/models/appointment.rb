@@ -3,6 +3,8 @@ class Appointment < ActiveRecord::Base
   belongs_to :user
   belongs_to :client
   
+  accepts_nested_attributes_for :location
+  
   def client_name 
     client.name
   end
@@ -16,6 +18,13 @@ class Appointment < ActiveRecord::Base
       write_attribute(:appointment_time, parse_time(time) ) 
     else
       write_attribute(:appointment_time, time)
+    end
+  end
+  
+  def location_attributes=(atts)
+    if atts[:nickname] != ""
+      location = self.user.locations.find_or_create_by(atts)  
+      self.location = location
     end
   end
   

@@ -7,6 +7,7 @@ class LocationsController < ApplicationController
   end
   
   def show 
+    @appointments = @location.appointments
   end
   
   def new 
