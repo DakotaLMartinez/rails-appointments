@@ -1,0 +1,27 @@
+<%= form_for location do |f| %> 
+  <p>
+    <%= f.label :nickname %>
+    <%= f.text_field :nickname %>
+  </p>
+  <p>
+    <%= f.label :street_address %>
+    <%= f.text_field :street_address %>
+  </p>
+  <p>
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :state %> 
+    <%= f.text_field :state %> 
+  </p>
+  <p>
+    <%= f.label :zipcode %> 
+    <%= f.text_field :zipcode %>
+  </p>
+  <p>
+    <%= f.label :business_name %> 
+    <%= f.text_field :business_name %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

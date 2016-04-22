@@ -72,6 +72,10 @@ label {
   width: 100px;
 }
 
+label:after {
+  content: ":";
+}
+
 .field_with_errors {
     display: inline-block;
     color: red;

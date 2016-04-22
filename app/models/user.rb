@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
      
   has_many :clients  
   has_many :appointments 
-  has_many :locations, through: :appointments
+  has_many :locations
   
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user| 

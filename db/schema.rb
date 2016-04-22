@@ -46,9 +46,12 @@ ActiveRecord::Schema.define(version: 20160420012901) do
     t.string   "state",          limit: 255
     t.string   "zipcode",        limit: 255
     t.string   "business_name",  limit: 255
+    t.integer  "user_id",        limit: 4
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
+
+  add_index "locations", ["user_id"], name: "index_locations_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

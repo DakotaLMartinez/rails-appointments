@@ -10,9 +10,9 @@ RSpec.describe User, type: :model do
   let(:randy) { Client.find_or_create_by(name: "Randy", phone_number: "(444) 456-8172", email: "randydandy@hotmail.com", user_id: sandra.id) }
   let(:aaron) { Client.find_or_create_by(name: "Aaron", phone_number: "(458) 283-9999", email: "aaronbobaaron@gmail.com", user_id: sandra.id) }
   
-  let(:santa_monica) { Location.find_or_create_by(nickname: "Santa Monica Music", city: "Santa Monica", street_address: "1901 Santa Monica Blvd", state: "CA", zipcode: "90404", business_name: "Santa Monica Music Center") }
-  let(:culver_city) { Location.find_or_create_by(nickname: "Culver City Music", city: "Culver City", street_address: "10862 Washington Blvd", state: "CA", zipcode: "90232", business_name: "Culver City Music Center") }
-  let(:los_angeles) { Location.find_or_create_by(nickname: "Hurry Curry", city: "Los Angeles", street_address: "12825 Venice Blvd", state: "CA", zipcode: "90066", business_name: "Hurry Curry") }
+  let(:santa_monica) { Location.find_or_create_by(nickname: "Santa Monica Music", city: "Santa Monica", street_address: "1901 Santa Monica Blvd", state: "CA", zipcode: "90404", business_name: "Santa Monica Music Center", user_id: sandra.id) }
+  let(:culver_city) { Location.find_or_create_by(nickname: "Culver City Music", city: "Culver City", street_address: "10862 Washington Blvd", state: "CA", zipcode: "90232", business_name: "Culver City Music Center", user_id: sandra.id) }
+  let(:los_angeles) { Location.find_or_create_by(nickname: "Hurry Curry", city: "Los Angeles", street_address: "12825 Venice Blvd", state: "CA", zipcode: "90066", business_name: "Hurry Curry", user_id: sandra.id) }
   let(:starbucks) { Location.find_or_create_by(nickname: "Starbucks") }
   
   let(:tomorrow_at_ten) { DateTime.now.midnight + 34.hours }
@@ -51,10 +51,10 @@ RSpec.describe User, type: :model do
       expect(sandra.appointments).to include(appointment1, appointment2, appointment3, appointment4, appointment5, appointment7)
     end
     
-    it "has many locations, through appointments" do 
+    it "has many locations" do 
       # association won't register properly unless the user object is saved first
       sandra.save
-      [appointment1, appointment2, appointment7]
+      [santa_monica, culver_city, los_angeles]
       expect(sandra.locations).to include(santa_monica, culver_city, los_angeles)
     end
     
