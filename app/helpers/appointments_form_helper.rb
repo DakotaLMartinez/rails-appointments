@@ -1,9 +1,9 @@
 module AppointmentsFormHelper
   def appointment_date(appointment)
     if appointment.appointment_time
-      appointment.appointment_time.strftime("%Y-%m-%e")
+      appointment.appointment_time.strftime("%m/%e/%Y")
     else
-      Time.now.strftime("%Y-%m-%e")
+      Time.now.strftime("%m/%e/%Y")
     end
   end
   

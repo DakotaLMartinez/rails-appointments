@@ -3,10 +3,17 @@ class Appointment < ActiveRecord::Base
   belongs_to :user
   belongs_to :client
   
+  accepts_nested_attributes_for :client
   accepts_nested_attributes_for :location
   
   def client_name 
     client.name
+  end
+  
+  def client_attributes=(atts)
+    if atts[:name] != ""
+      self.client = self.user.clients.find_or_create_by(atts)   
+    end
   end
   
   def location_name 
@@ -32,8 +39,14 @@ class Appointment < ActiveRecord::Base
     appointment_time + duration.seconds
   end
   
+  def parse_date(string)
+    array = string.split("/")
+    first_item = array.pop
+    array.unshift(first_item).join("-")
+  end
+  
   def parse_time(hash)
-    DateTime.parse(hash["date"] + " " + hash["hour"] + ":" + hash["min"])
+    DateTime.parse(parse_date(hash["date"]) + " " + hash["hour"] + ":" + hash["min"])
   end
   
   ## Validations 

@@ -1,18 +1,21 @@
 <%= render partial: "layouts/errors", locals: { object: appointment } %>
 <%= form_for appointment do |f| %>
-  <p>
-    <%= label_tag :client %>
-    <%= collection_select :appointment, :client_id, current_user.clients, :id, :name, { prompt: true } %>
-  </p>
-  <p>
-    <label>Or create a new client</label> 
-    <%= fields_for :client do |ff| %> 
+  <div class="field">
+    <p>
+      <%= label_tag :client %>
+      <%= collection_select :appointment, :client_id, current_user.clients, :id, :name, { prompt: true } %>
+    </p>
+  </div>
+  <p>Or create a new client</p>
+  <div class="field">
+    <%= f.fields_for :client, Client.new do |ff| %> 
+      <%= ff.label :name %>
       <%= ff.text_field :name %>
     <% end %>
-  </p>
+  </div>
   <p>
     <%= label_tag "appointment[appointment_time][date]", "Date" %>
-    <%= date_field_tag "appointment[appointment_time][date]", appointment_date(appointment) %>
+    <%= text_field_tag "appointment[appointment_time][date]", appointment_date(appointment), class: "datepicker" %>
   </p>
   <p id="time">
     <%= label_tag "appointment[appointment_time][hour]", "Time" %>
@@ -31,9 +34,10 @@
     <%= f.label :location_id %>
     <%= collection_select :appointment, :location_id, current_user.locations, :id, :nickname, {prompt: true } %>
   </p>
+  <p>Or Create a New Location</p>
   <p>
-    <%= f.label :location, "Or create a new Location" %>
     <%= f.fields_for :location, Location.new do |location_atts| %> 
+      <%= location_atts.label :nickname %>
       <%= location_atts.text_field :nickname %>
     <% end %>
   </p>

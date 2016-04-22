@@ -11,14 +11,12 @@ class AppointmentsController < ApplicationController
   end
   
   def new 
-    @appointment = Appointment.new
+    @appointment = current_user.appointments.build
   end
   
   def create 
-    @appointment = Appointment.new(appointment_params)
-    @appointment.user = current_user
+    @appointment = Appointment.new(appointment_params.merge(user_id: current_user.id))
     if @appointment.valid?
-      @appointment.client = current_user.clients.find_or_create_by(new_client_params) if new_client_params[:name] != ""
       @appointment.save
       redirect_to appointment_path(@appointment)
     else 
@@ -32,10 +30,6 @@ class AppointmentsController < ApplicationController
   
   def update 
     if @appointment.update(appointment_params)
-      if new_client_params[:name] != ""
-        @appointment.client = current_user.clients.find_or_create_by(new_client_params)
-        @appointment.save
-      end
       redirect_to appointment_path(@appointment)
     else 
       render :edit
@@ -59,11 +53,7 @@ class AppointmentsController < ApplicationController
   
   def appointment_params
     time_keys = params[:appointment].try(:fetch, :appointment_time, {}).keys
-    params.require(:appointment).permit(:client_id, :duration, :price, :location_id, location_attributes: [:nickname], appointment_time: time_keys)
-  end
-  
-  def new_client_params
-    params.require(:client).permit(:name)
+    params.require(:appointment).permit(:client_id, :duration, :price, :location_id, location_attributes: [:nickname], client_attributes: [:name], appointment_time: time_keys)
   end
   
 end

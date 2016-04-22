@@ -5,9 +5,9 @@ feature "Appointments Associations Spec", :devise do
   scenario "Users can create a new client through the New Appointment Form" do 
     user = FactoryGirl.create(:user)
     signin(user.email, user.password)
-    today = Time.now.strftime("%Y-%m-%d")
+    today = Time.now.strftime("%m/%d/%Y")
     visit new_appointment_path
-    fill_in "client_name", with: "my awesome new client"
+    fill_in "appointment_client_attributes_name", with: "my awesome new client"
     fill_in "appointment_appointment_time_date", with: today
     select "2 PM", from: "appointment_appointment_time_hour"
     select "00", from: "appointment_appointment_time_min"

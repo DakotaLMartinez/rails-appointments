@@ -10,7 +10,7 @@ feature "Appointment Edit", :devise do
     new_client = user.clients.create(name: 'my new client')
     new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%Y-%m-%d"), "hour" => tomorrow_at_ten.strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
     visit edit_appointment_path(new_appointment)
-    fill_in "client_name", with: "my edited client"
+    fill_in "appointment_client_attributes_name", with: "my edited client"
     fill_in "appointment_appointment_time_date", with: four_days_later.strftime("%Y-%m-%d")
     select "6 PM", from: "appointment_appointment_time_hour"
     select "30", from: "appointment_appointment_time_min"

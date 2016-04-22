@@ -12,6 +12,10 @@ body {
   width: 85%; 
   margin: 0 auto;
 }
+
+a, a:hover {
+  text-decoration: none !important;
+}
 nav {
   background: $nav-color;
 }
@@ -64,12 +68,27 @@ h1 a {
     position: relative;
     top: -5px;
 }
+h1 a:hover {
+  color: white;
+}
 
 // Form Styles //
 
+form {
+    width: 400px;
+    border: 2px solid black;
+    padding: 30px 20px;
+    border-radius: 5px;
+    background: lightgray;
+}
 label {
-  display: inline-block;
-  width: 100px;
+    display: inline-block;
+    width: 75px;
+    text-align: right;
+}
+
+input[type="submit"] {
+  margin-left: 80px;
 }
 
 label:after {

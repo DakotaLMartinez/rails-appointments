@@ -27,7 +27,7 @@ feature 'Appointments Index', :devise do
     new_client = user.clients.create(name: 'my new client')
     today = Time.now.strftime("%Y-%m-%d")
     visit new_appointment_path
-    fill_in "client_name", with: "my awesome second client"
+    fill_in "appointment_client_attributes_name", with: "my awesome second client"
     fill_in "appointment_appointment_time_date", with: today
     select "2 PM", from: "appointment_appointment_time_hour"
     select "00", from: "appointment_appointment_time_min"
