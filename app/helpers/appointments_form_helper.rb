@@ -1,4 +1,22 @@
 module AppointmentsFormHelper
+  def client_fields(form, appointment, client)
+    if client
+      output = [content_tag(:h3, "with #{client.name}"), hidden_field_tag("appointment[client_id]", client.id)]
+      safe_join(output)
+    else
+      render partial: "client_fields", locals: { f: form, appointment: appointment }
+    end
+  end
+  
+  def location_fields(form, appointment, location)
+    if location 
+      output = [content_tag(:h3, "at #{location.nickname}"), hidden_field_tag("appointment[location_id]", location.id)]
+      safe_join(output)
+    else 
+      render partial: "location_fields", locals: { f: form, appointment: appointment }
+    end
+  end
+  
   def appointment_date(appointment)
     if appointment.appointment_time
       appointment.appointment_time.strftime("%m/%e/%Y")

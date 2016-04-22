@@ -1,0 +1,13 @@
+<div class="field">
+  <p>
+    <%= label_tag :client %>
+    <%= collection_select :appointment, :client_id, current_user.clients, :id, :name, { prompt: true } %>
+  </p>
+</div>
+<p>Or create a new client</p>
+<div class="field">
+  <%= f.fields_for :client, Client.new do |ff| %> 
+    <%= ff.label :name %>
+    <%= ff.text_field :name %>
+  <% end %>
+</div>

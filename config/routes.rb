@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   resources :appointments
-  resources :locations
+  resources :locations do 
+    resources :appointments, only: [:index, :show, :new]
+  end
   resources :clients do 
-    resources :appointments
+    resources :appointments, only: [:index, :show, :new]
   end
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   get 'welcome/home'

@@ -1,18 +1,6 @@
 <%= render partial: "layouts/errors", locals: { object: appointment } %>
 <%= form_for appointment do |f| %>
-  <div class="field">
-    <p>
-      <%= label_tag :client %>
-      <%= collection_select :appointment, :client_id, current_user.clients, :id, :name, { prompt: true } %>
-    </p>
-  </div>
-  <p>Or create a new client</p>
-  <div class="field">
-    <%= f.fields_for :client, Client.new do |ff| %> 
-      <%= ff.label :name %>
-      <%= ff.text_field :name %>
-    <% end %>
-  </div>
+  <%= client_fields(f, appointment, client) %>
   <p>
     <%= label_tag "appointment[appointment_time][date]", "Date" %>
     <%= text_field_tag "appointment[appointment_time][date]", appointment_date(appointment), class: "datepicker" %>
@@ -30,16 +18,6 @@
     <%= f.label :price %> 
     <%= f.number_field :price, value: float_two_decimals(appointment.price) %>
   </p>
-  <p>
-    <%= f.label :location_id %>
-    <%= collection_select :appointment, :location_id, current_user.locations, :id, :nickname, {prompt: true } %>
-  </p>
-  <p>Or Create a New Location</p>
-  <p>
-    <%= f.fields_for :location, Location.new do |location_atts| %> 
-      <%= location_atts.label :nickname %>
-      <%= location_atts.text_field :nickname %>
-    <% end %>
-  </p>
+  <%= location_fields(f, appointment, location) %>
   <p><%= f.submit %></p>
 <% end %>
