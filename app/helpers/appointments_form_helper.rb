@@ -1,4 +1,12 @@
-module AppointmentsHelper
+module AppointmentsFormHelper
+  def appointment_date(appointment)
+    if appointment.appointment_time
+      appointment.appointment_time.strftime("%Y-%m-%e")
+    else
+      Time.now.strftime("%Y-%m-%e")
+    end
+  end
+  
   def hour_selector(name, appointment)
     time_choices = {
      "8 AM" => 8, 
@@ -50,38 +58,4 @@ module AppointmentsHelper
     DateTime.parse(array["date"] + " " + array["hour"] + ":" + array["min"])
   end
   
-  def show_client_name(appointment)
-    if current_page?(appointments_path)
-      link_to appointment.client_name, appointment_path(appointment)
-    else 
-      appointment.client_name
-    end
-  end
-  
-  def appointment_date(appointment)
-    if appointment.appointment_time
-      appointment.appointment_time.strftime("%Y-%m-%e")
-    else
-      Time.now.strftime("%Y-%m-%e")
-    end
-  end
-  
-  def show_time(appointment)
-    appointment.appointment_time.strftime("%A %B %e %l:%M %p")
-  end
-  
-  def show_price(appointment)
-    number_to_currency(appointment.price)
-  end
-  
-  def show_duration(appointment)
-    options = {
-      1800 => "30 Minutes", 
-      2700 => "45 Minutes", 
-      3600 => "1 hour", 
-      4500 => "1 hour and 15 minutes",
-      5400 => "1 hour and 30 minutes"
-    }
-    options[appointment.duration.to_i]
-  end
 end

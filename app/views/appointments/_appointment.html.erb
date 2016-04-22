@@ -1,8 +1,5 @@
 <div class="appointment">
-  <h2><%= show_client_name(appointment) %></h2>
-  <p><%= show_time(appointment) %></p>
-  <p>Duration: <%= show_duration(appointment) %></p>
-  <p>Price: <%= show_price(appointment) %></p>
-  <p>Location: <%= appointment.location.nickname if appointment.location %></p>
-  <%= link_to "Edit", edit_appointment_path(appointment) %>, <%= link_to "Delete", appointment, method: :delete, data: { confirm: "Are yous ure you want to delete this appointment?" } %>
+  <%= appointment_heading(appointment) %>
+  <%= appointment_details(appointment) %>
+  <%= appointment_edit_delete_links(appointment) %>
 </div>

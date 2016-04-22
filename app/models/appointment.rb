@@ -10,7 +10,7 @@ class Appointment < ActiveRecord::Base
   end
   
   def location_name 
-    location.nickname
+    location.nickname if location
   end
   
   def appointment_time=(time)
@@ -41,6 +41,7 @@ class Appointment < ActiveRecord::Base
   validates :duration, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :appointment_time, presence: true 
   validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true 
+  validates :client_id, presence: true
   
   include ActiveModel::Validations 
   

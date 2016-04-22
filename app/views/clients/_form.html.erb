@@ -1,7 +1,7 @@
 <%= render partial: 'layouts/errors', locals: { object: client } %>
 <%= form_for client do |f| %> 
-  <p><%= f.label :name %>: <%= f.text_field :name %></p>
-  <p><%= f.label :phone_number %>: <%= f.text_field :phone_number %></p>
-  <p><%= f.label :email %>: <%= f.text_field :email %></p>
+  <p><%= f.label :name %> <%= f.text_field :name %></p>
+  <p><%= f.label :phone_number %> <%= f.text_field :phone_number %></p>
+  <p><%= f.label :email %> <%= f.text_field :email %></p>
   <p><%= f.submit %></p>
 <% end %>
