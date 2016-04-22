@@ -8,6 +8,7 @@ class ClientsController < ApplicationController
   end
   
   def show 
+    @appointments = @client.appointments
   end
   
   def new 
