@@ -3,10 +3,6 @@ class Appointment < ActiveRecord::Base
   belongs_to :user
   belongs_to :client
   
-  def date
-    
-  end
-  
   def client_name 
     client.name
   end
@@ -16,7 +12,15 @@ class Appointment < ActiveRecord::Base
   end
   
   def appointment_time=(time)
-    write_attribute(:appointment_time, parse_time(time) )
+    if time.is_a?(Hash)
+      write_attribute(:appointment_time, parse_time(time) ) 
+    else
+      write_attribute(:appointment_time, time)
+    end
+  end
+  
+  def end_time
+    appointment_time + duration.seconds
   end
   
   def parse_time(hash)
@@ -25,7 +29,7 @@ class Appointment < ActiveRecord::Base
   
   ## Validations 
   
-  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :duration, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :appointment_time, presence: true 
   validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true 
   
@@ -48,7 +52,7 @@ class Appointment < ActiveRecord::Base
       # progress when an existing appointment is set to start
       appointments.each do |appointment| 
         if @appointment != appointment 
-          if appointment.appointment_time < @appointment.appointment_time && @appointment.appointment_time < appointment.appointment_time + appointment.duration.seconds || @appointment.appointment_time < appointment.appointment_time && appointment.appointment_time < @appointment.appointment_time + @appointment.duration.seconds
+          if appointment.appointment_time <= @appointment.appointment_time && @appointment.appointment_time <= appointment.end_time || @appointment.appointment_time <= appointment.appointment_time && appointment.appointment_time <= @appointment.end_time
             @appointment.errors.add(:appointment_time, "is not available.")
           end
         end

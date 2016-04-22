@@ -5,6 +5,7 @@
       <li><%= link_to "About", about_path %></li>
     <% if user_signed_in? %>
       <li><%= link_to "Clients", clients_path %></li>
+      <li><%= link_to "Appointments", appointments_path %></li>
       <li class="right"><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
     <% else %>
       <li class="right"><%= link_to "Sign in", new_user_session_path %></li>

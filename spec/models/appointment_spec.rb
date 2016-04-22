@@ -87,10 +87,16 @@ RSpec.describe Appointment, type: :model do
       
     end
     
-    it "cannot book an appointment on top of another appointment" do 
+    it "cannot book an appointment that starts in the middle of another appointment" do 
       Appointment.create(valid_attributes)
       half_an_hour_later = two_days_later + 30.minutes
-      conflicting_appointment = Appointment.new( valid_attributes.merge(appointment_time: half_an_hour_later))
+      conflicting_appointment = Appointment.create( valid_attributes.merge(appointment_time: half_an_hour_later))
+      expect(conflicting_appointment).not_to be_valid
+    end
+    
+    it "cannot book an appointment that starts at the same time as another appointment" do 
+      Appointment.create(valid_attributes)
+      conflicting_appointment = Appointment.create(valid_attributes)
       expect(conflicting_appointment).not_to be_valid
     end
     

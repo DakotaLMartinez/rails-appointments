@@ -4,7 +4,7 @@ module ClientsHelper
   end
   
   def client_phone(client)
-    if client.phone_number != ""
+    if client.phone_number && client.phone_number != ""
       number_array = client.phone_number.gsub(/\D/, '').split(//)  
       "(#{number_array[0,3].join}) #{number_array[3,3].join}-#{number_array[6,4].join}"
     end

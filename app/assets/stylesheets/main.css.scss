@@ -64,3 +64,20 @@ h1 a {
     position: relative;
     top: -5px;
 }
+
+// Form Styles //
+
+label {
+  display: inline-block;
+  width: 100px;
+}
+
+.field_with_errors {
+    display: inline-block;
+    color: red;
+    font-weight: bold;
+    
+    input[type=text] {
+      border: 2px solid red;
+    }
+}

@@ -1,0 +1,8 @@
+<% if object && object.errors.any? %>
+  <h2><%= "#{object.errors.full_messages.uniq.count} error(s):" %></h2>
+  <ul>
+  <% object.errors.full_messages.uniq.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+  </ul>
+<% end %>
