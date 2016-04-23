@@ -13,7 +13,6 @@ feature "Appointment Nested Routes", :devise do
     select "11 AM", from: "appointment_appointment_time_hour"
     click_button "Create Appointment"
     visit client_path(new_client)
-    # new_appointment = Appointment.last
     expect(page).to have_content(short_time(Appointment.last))
   end
   

@@ -1,11 +1,15 @@
-<p>
-  <%= f.label :location_id %>
-  <%= collection_select :appointment, :location_id, current_user.locations, :id, :nickname, {prompt: true } %>
-</p>
+<div class="field">
+  <p>
+    <%= f.label :location_id %>
+    <%= collection_select :appointment, :location_id, current_user.locations, :id, :nickname, {prompt: true } %>
+  </p>
+</div>
 <p>Or Create a New Location</p>
-<p>
-  <%= f.fields_for :location, Location.new do |location_atts| %> 
-    <%= location_atts.label :nickname %>
-    <%= location_atts.text_field :nickname %>
-  <% end %>
-</p>
+<div class="field">
+  <p>
+    <%= f.fields_for :location, Location.new do |location_atts| %> 
+      <%= location_atts.label :nickname %>
+      <%= location_atts.text_field :nickname %>
+    <% end %>
+  </p>
+</div>
