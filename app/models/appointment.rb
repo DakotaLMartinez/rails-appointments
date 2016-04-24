@@ -6,6 +6,10 @@ class Appointment < ActiveRecord::Base
   accepts_nested_attributes_for :client
   accepts_nested_attributes_for :location
   
+  def start_time
+    self.appointment_time
+  end
+  
   def client_name 
     client.name
   end
@@ -22,7 +26,7 @@ class Appointment < ActiveRecord::Base
   
   def appointment_time=(time)
     if time.is_a?(Hash)
-      write_attribute(:appointment_time, parse_time(time) ) 
+      write_attribute(:appointment_time, parse_datetime(time) ) 
     else
       write_attribute(:appointment_time, time)
     end
@@ -45,7 +49,7 @@ class Appointment < ActiveRecord::Base
     array.unshift(first_item).join("-")
   end
   
-  def parse_time(hash)
+  def parse_datetime(hash)
     DateTime.parse(parse_date(hash["date"]) + " " + hash["hour"] + ":" + hash["min"])
   end
   

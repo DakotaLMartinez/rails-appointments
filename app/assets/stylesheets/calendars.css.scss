@@ -1,0 +1,105 @@
+td {
+    height: 120px;
+    width: 10%;
+}
+
+td div {
+   height: 15px;
+   line-height: 15px;
+}
+
+.simple-calendar.weekly h2, .simple-calendar.weekly h3 {
+    text-align: center;
+    margin: 5px 0;
+}
+
+.simple-calendar.weekly td {
+    height: 550px;
+    border: 1px solid black;
+    position: relative;
+}
+
+.quarter {
+  font-size: 9px;
+  line-height: 7px;
+  background: clear;
+  content: "";
+  height: 10px;
+  width: 100%;
+  border-bottom: 1px dotted black;
+}
+.quarter:first-child {
+    border-top: 1px solid black;
+}
+
+.quarter:nth-child(4n) {
+  border-bottom: 1px solid black;
+}
+
+td .quarter:first-child:before {
+    content: "8 AM"
+}
+
+td .quarter:nth-child(5):before {
+    content: "9 AM"
+}
+
+td .quarter:nth-child(9):before {
+    content: "10 AM"
+}
+
+td .quarter:nth-child(13):before {
+    content: "11 AM"
+}
+
+td .quarter:nth-child(17):before {
+    content: "12 PM"
+}
+
+td .quarter:nth-child(21):before {
+    content: "1 PM"
+}
+
+td .quarter:nth-child(25):before {
+    content: "2 PM"
+}
+
+td .quarter:nth-child(29):before {
+    content: "3 PM"
+}
+
+td .quarter:nth-child(33):before {
+    content: "4 PM"
+}
+
+td .quarter:nth-child(37):before {
+    content: "5 PM"
+}
+
+td .quarter:nth-child(41):before {
+    content: "6 PM"
+}
+
+td .quarter:nth-child(45):before {
+    content: "7 PM"
+}
+
+td .quarter:nth-child(49):before {
+    content: "8 PM"
+}
+
+td .appointment {
+    position: absolute;
+    height: 1px;
+    width: 90%;
+    background: rgba(255, 192, 203, 0.85);
+    content: " ";
+    text-align: center;
+    font-size: 85%;
+}
+
+td .appointment a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}

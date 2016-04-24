@@ -26,4 +26,8 @@ module AppointmentsAttributeHelper
     content_tag(:p, appointment.location_name )
   end
   
+  def at_location(appointment)
+    " at #{appointment.location_name}" if appointment.location
+  end
+  
 end
