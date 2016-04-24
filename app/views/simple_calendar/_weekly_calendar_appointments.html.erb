@@ -1,8 +1,8 @@
 <%= week_calendar events: appointments do |date, appointments| %>
   
   <% appointments.each do |appointment| %>
-    <div class="appointment" style="<%= appointment_position(appointment) %> <%= appointment_height(appointment) %>">
-      <%= link_to("#{appointment.client_name}#{at_location(appointment)}", appointment_path(appointment) ) %>
+    <div class="appointment<%= highlight_appointment(appointment) %>" style="<%= appointment_position(appointment) %> <%= appointment_height(appointment) %>">
+      <%= link_to(appointment_text(appointment), appointment_path(appointment) ) %>
     </div>
   <% end %>
 <% end %>

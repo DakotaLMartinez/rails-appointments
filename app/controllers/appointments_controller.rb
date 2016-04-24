@@ -1,18 +1,19 @@
 class AppointmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
+  before_action :set_appointments, only: [:index, :show, :edit]
   before_action :set_client, only: [:index, :new, :edit]
   before_action :set_location, only: [:index, :new, :edit]
     
   def index 
-    @appointments = current_user.appointments
+    @upcoming_appointments = current_user.upcoming_appointments
   end 
   
   def show 
-    
   end
   
   def new 
+    @appointments = current_user.appointments.select { |a| a.persisted? }
     @appointment = current_user.appointments.build
   end
   
@@ -23,6 +24,7 @@ class AppointmentsController < ApplicationController
       redirect_to appointment_path(@appointment)
     else 
       @appointment.user = nil
+      @appointments = current_user.appointments.select { |a| a.persisted? }
       render :new
     end
   end
@@ -59,6 +61,10 @@ class AppointmentsController < ApplicationController
       flash[:error] = "Appointment not found."
       redirect_to appointments_path
     end
+  end
+  
+  def set_appointments
+    @appointments = current_user.appointments.order(appointment_time: :desc)
   end
   
   def appointment_params

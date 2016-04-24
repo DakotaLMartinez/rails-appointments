@@ -14,4 +14,18 @@ module AppointmentsCalendarHelper
   def at_location(appointment)
     " at #{appointment.location_name}" if appointment.location
   end
+  
+  def highlight_appointment(appointment)
+    if current_page?( appointment_path(appointment)) || current_page?( edit_appointment_path(appointment) )
+      " highlight"
+    end
+  end
+  
+  def appointment_text(appointment)
+    "<span class='name'>#{appointment.client_name}</span>#{at_location(appointment)}".html_safe
+  end
+  
+  def from_to(appointment)
+    "#{appointment.start_time.strftime("%l:%M %p")} - #{appointment.end_time.strftime("%l:%M %p")}"
+  end
 end

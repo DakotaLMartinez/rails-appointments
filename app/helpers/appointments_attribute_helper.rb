@@ -1,10 +1,14 @@
 module AppointmentsAttributeHelper
   def full_time(appointment)
-    appointment.appointment_time.strftime("%A %B %e %l:%M %p")
+    "#{appointment.appointment_time.strftime("%A %B %e %l:%M %p")} - #{end_time(appointment)}"
   end
   
   def short_time(appointment)
     appointment.appointment_time.strftime("%b %d, %l:%M %p ")
+  end
+  
+  def end_time(appointment)
+    appointment.end_time.strftime("%l:%M %p")
   end
   
   def show_duration(appointment)
@@ -26,8 +30,5 @@ module AppointmentsAttributeHelper
     content_tag(:p, appointment.location_name )
   end
   
-  def at_location(appointment)
-    " at #{appointment.location_name}" if appointment.location
-  end
   
 end

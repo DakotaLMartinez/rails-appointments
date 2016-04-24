@@ -10,6 +10,10 @@ class Appointment < ActiveRecord::Base
     self.appointment_time
   end
   
+  def end_time
+    appointment_time + duration.seconds
+  end
+  
   def client_name 
     client.name
   end
@@ -39,10 +43,6 @@ class Appointment < ActiveRecord::Base
     end
   end
   
-  def end_time
-    appointment_time + duration.seconds
-  end
-  
   def parse_date(string)
     array = string.split("/")
     first_item = array.pop
@@ -50,7 +50,7 @@ class Appointment < ActiveRecord::Base
   end
   
   def parse_datetime(hash)
-    DateTime.parse(parse_date(hash["date"]) + " " + hash["hour"] + ":" + hash["min"])
+    Time.zone.parse(parse_date(hash["date"]) + " " + hash["hour"] + ":" + hash["min"])
   end
   
   ## Validations 

@@ -1,2 +1,9 @@
-<h1>New Appointment</h1>
-<%= render partial: 'form', locals: { appointment: @appointment, client: @client, location: @location } %>
+<div class="row">
+  <div class="col-md-4">
+    <h1>New Appointment</h1>
+    <%= render partial: 'form', locals: { appointment: @appointment, client: @client, location: @location } %>
+  </div>  
+  <div class="col-md-8">
+    <%= add_weekly_calendar(@appointments) %>
+  </div>
+</div>

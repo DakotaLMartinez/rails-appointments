@@ -227,9 +227,13 @@ body{
     line-height: 32px;
 }
 
-td.day p{
+.datepicker td.day p {
     height: 20px;
     line-height: 20px;
     width: 20px;
     margin-bottom: 0;
+}
+
+.datepicker td.day {
+    height: 20px;
 }

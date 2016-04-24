@@ -1,3 +1,4 @@
 <h1>Appointments <%= link_to "+ New", new_appointment_path %></h1>
 <%= add_weekly_calendar(@appointments) %>
-<%= render @appointments %>
+<h3>Upcoming Appointments</h3>
+<%= render @upcoming_appointments %>
