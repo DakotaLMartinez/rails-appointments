@@ -1,7 +1,7 @@
 module AppointmentsPartialHelper
   def appointment_heading(appointment)
     if current_page?(appointment_path(appointment))
-      content_tag(:h2, show_client_name(appointment) )
+      content_tag(:h3, link_to(show_client_name(appointment), client_path(appointment.client) ) )
     else
       render partial: "appointments/appointment_short", locals: { appointment: appointment }
     end

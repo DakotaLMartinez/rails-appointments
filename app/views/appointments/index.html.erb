@@ -1,4 +1,22 @@
 <h1>Appointments <%= link_to "+ New", new_appointment_path %></h1>
 <%= add_weekly_calendar(@appointments) %>
-<h3>Upcoming Appointments</h3>
-<%= render @upcoming_appointments %>
+<div class="row">
+  <div class="col-sm-6">
+    <h3>Upcoming Appointments</h3>
+    <%= render @upcoming_appointments %>
+  </div>
+  <div class="col-sm-6">
+    <h3>Locations</h3>
+    <div class="row">
+      <div class="col-xs-4">
+        <h4>Location</h4>
+      </div>
+      <div class="col-xs-4">
+        <h4>Appointments</h4>
+      </div>
+      <div class="col-xs-4">
+        <h4>Value</h4>
+      </div>
+    </div>
+  </div>
+</div>

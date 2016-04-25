@@ -107,3 +107,17 @@ label:after {
       border: 2px solid red;
     }
 }
+
+.btn.btn-primary{
+  background-color: blue;
+}
+
+.btn.btn-secondary {
+    background-color: lightcyan;
+}
+
+@media screen and (max-width: 768px) {
+   .client .btn-secondary, .client .btn-danger {
+        margin-top: 20px;
+    } 
+}

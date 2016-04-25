@@ -1,2 +1,16 @@
 <h1>Clients <%= link_to "+ New", new_client_path %></h1>
-<%= render @clients %>
+<div class="row">
+  <div class="hidden-xs col-sm-3">
+    <h3>Name</h3>
+  </div>
+  <div class="hidden-xs col-sm-3">
+    <h3>Email</h3>
+  </div>
+  <div class="hidden-xs col-sm-3">
+    <h3>Phone #</h3>
+  </div>
+  <div class="hidden-xs col-sm-3">
+    <h3>Appointments</h3>
+  </div>
+</div>
+<%= render partial: "client_index", collection: @clients, as: :client %>

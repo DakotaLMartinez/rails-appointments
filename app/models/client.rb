@@ -3,6 +3,14 @@ class Client < ActiveRecord::Base
   has_many :appointments 
   has_many :locations, through: :appointments
   
+  def value
+    appointments.collect { |a| a.price }.compact.inject(0, :+)
+  end
+  
+  def appointment_count
+    appointments.count
+  end
+  
   ## Validations 
   
   validates :name, presence: true 

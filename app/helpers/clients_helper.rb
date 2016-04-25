@@ -18,4 +18,12 @@ module ClientsHelper
     end
   end
   
+  def client_value(client)
+    number_to_currency(client.value) if client.value != 0
+  end
+  
+  def appointment_count(client)
+    link_to "Total Appointments: #{client.appointment_count}", client_path(client)
+  end
+  
 end
