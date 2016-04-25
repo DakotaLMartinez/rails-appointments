@@ -10,6 +10,15 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe AppointmentsFormHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe AppointmentsFormHelper, :devise, type: :helper do
+  let(:user) { User.create(email: "my@email.com", password: "mypassword") }
+  let(:tomorrow_at_ten) { DateTime.now.midnight + 34.hours }
+  let(:new_client) { user.clients.create(name: 'my new client') }
+  let(:new_appointment) { user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%Y-%m-%d"), "hour" => (tomorrow_at_ten - 1.hour).strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client) }
+  describe "#appointment_hour" do 
+    it "converts an appointment time into the 10 PM format" do 
+      expect(appointment_hour(new_appointment)).to eq("9 AM")
+    end
+  end
+  
 end

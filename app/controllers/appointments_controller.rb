@@ -21,7 +21,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params.merge(user_id: current_user.id))
     if @appointment.valid?
       @appointment.save
-      redirect_to appointment_path(@appointment)
+      redirect_to appointments_path
     else 
       @appointment.user = nil
       @appointments = current_user.appointments.select { |a| a.persisted? }
@@ -34,7 +34,7 @@ class AppointmentsController < ApplicationController
   
   def update 
     if @appointment.update(appointment_params)
-      redirect_to appointment_path(@appointment)
+      redirect_to appointments_path
     else 
       render :edit
     end
@@ -68,8 +68,7 @@ class AppointmentsController < ApplicationController
   end
   
   def appointment_params
-    time_keys = params[:appointment].try(:fetch, :appointment_time, {}).keys
-    params.require(:appointment).permit(:client_id, :duration, :price, :location_id, location_attributes: [:nickname], client_attributes: [:name], appointment_time: time_keys)
+    params.require(:appointment).permit(:client_id, :duration, :price, :location_id, location_attributes: [:nickname], client_attributes: [:name], appointment_time: [:date, :hour, :min])
   end
   
 end

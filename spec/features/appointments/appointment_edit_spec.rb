@@ -28,9 +28,9 @@ feature "Appointment Edit", :devise do
     user = FactoryGirl.create(:user)
     signin(user.email, user.password)
     new_client = user.clients.create(name: 'my new client')
-    new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%Y-%m-%d"), "hour" => tomorrow_at_ten.strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
+    new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%Y-%m-%d"), "hour" => (tomorrow_at_ten - 1.hour).strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
     visit edit_appointment_path(new_appointment)
-    expect(page).to have_content("10 AM")
+    expect( find(:css, 'select#appointment_appointment_time_hour').value ).to eq("9")
   end
   
   scenario "users can't edit appointments made by other users" do 

@@ -17,6 +17,8 @@ cd rails-appointments
 bundle install
 ```
 
+The repo doesn't include the database.yml or secrets.yml files, so you'll need to paste in these commands to copy them into the project.
+
 ```
 
 cat > config/database.yml << EOF
