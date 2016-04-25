@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= body_class %>">
   
   <%= render "layouts/navbar" %>
 
@@ -14,7 +14,7 @@
   <%= content_tag(:div, flash[:notice], id: "flash_notice", class: "container") if flash[:notice] %> 
   <%= content_tag(:div, flash[:alert], id: "flash_alert", class: "container") if flash[:alert] %>
   
-  <div class="container">
+  <div class="main container">
     <%= yield %>  
   </div>
   

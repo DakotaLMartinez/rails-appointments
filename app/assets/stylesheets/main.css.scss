@@ -4,10 +4,25 @@ $nav-color: #FFC970;
 $menu-item-background-color: $nav-color;
 $menu-item-hover-background-color: darken($nav-color, 15);
 
+body.home {
+  background: url('https://images.unsplash.com/photo-1421757295538-9c80958e75b0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=3628f27cd5768ece147877e2dd792c6c') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: white;
+}
+
 body {
   margin: 0; 
   padding: 0;
 }
+
+.home .main {
+  text-shadow: 2px 2px black;
+  text-align: center;
+}
+
 .container {
   width: 85%; 
   margin: 0 auto;
