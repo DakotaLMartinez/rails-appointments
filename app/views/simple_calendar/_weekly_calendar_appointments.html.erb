@@ -2,7 +2,7 @@
   
   <% appointments.each do |appointment| %>
     <div class="appointment<%= highlight_appointment(appointment) %>" style="<%= appointment_position(appointment) %> <%= appointment_height(appointment) %>">
-      <%= link_to(appointment_text(appointment), appointment_path(appointment) ) %>
+      <%= link_to(appointment_text(appointment), edit_appointment_path(appointment) ) %>
     </div>
   <% end %>
 <% end %>

@@ -1,0 +1,11 @@
+<h1>Client List</h1>
+<h3>Location</h3>
+<h5><%= link_to @location.nickname, location_path(@location) %></h5>
+<p><%= show_address(@location) %></p>
+
+<h3>Clients</h3>
+<ul>
+  <% @clients.each do |client| %> 
+    <li><%= link_to client.name, client_path(client) %></li>
+  <% end %>
+</ul>

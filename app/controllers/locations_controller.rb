@@ -1,9 +1,13 @@
 class LocationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_location, only: [:show, :edit, :update, :destroy]
+  before_action :set_location, only: [:client_list, :show, :edit, :update, :destroy]
   
   def index 
     @locations = current_user.locations
+  end
+  
+  def client_list 
+    @clients = @location.clients
   end
   
   def show 

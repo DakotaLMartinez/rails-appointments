@@ -1,2 +1,18 @@
 <h1>Locations <%= link_to "+ New", new_location_path %></h1>
-<%= render @locations %>
+<div class="row">
+  <div class="col-sm-3 hidden-xs">
+    <h3>Nickname</h3>
+  </div>
+  <div class="col-sm-3 hidden-xs">
+    <h3>Address</h3>
+  </div>
+  <div class="col-sm-3 hidden-xs">
+    <h3>Clients</h3>
+  </div>
+  <div class="col-sm-3 hidden-xs">
+    <h3>Appointments</h3>
+  </div>
+</div>
+<div class="locations">
+  <%= render partial: "location_index", collection: @locations, as: :location %>  
+</div>

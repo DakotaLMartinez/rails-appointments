@@ -28,4 +28,14 @@ module AppointmentsCalendarHelper
   def from_to(appointment)
     "#{appointment.start_time.strftime("%l:%M %p")} - #{appointment.end_time.strftime("%l:%M %p")}"
   end
+  
+  def date_of_next(day, start_date)
+    date = Date.parse(day)
+    delta = date >= start_date ? 0 : 7
+    date + delta
+  end
+  
+  def date_of_last(day)
+    date_of_next(day) - 7.days
+  end
 end

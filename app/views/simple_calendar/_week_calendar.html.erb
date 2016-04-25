@@ -3,7 +3,7 @@
     <h2><%= start_date.strftime("%b %Y") %></h2>
     <h3>
       <%= link_to "Previous", calendar.url_for_previous_view, class: "btn" %>
-      Week of <%= (start_date - 6.days).strftime("%b %d") %> to <%= start_date.strftime("%b %d")  %> 
+      Week of <%= start_date.strftime("%b %d") %> to <%= (start_date + 6.days).strftime("%b %d")  %> 
       <%= link_to "Next", calendar.url_for_next_view, class: "btn" %>
     </h3>
   </div>

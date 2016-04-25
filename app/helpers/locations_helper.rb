@@ -4,7 +4,7 @@ module LocationsHelper
   end
   
   def city_state_zip(location)
-    "#{location.city}, #{location.state} #{location.zipcode}" if location.state && location.zipcode
+    "#{location.city}, #{location.state} #{location.zipcode}" if location.city && location.state && location.zipcode
   end
   
   def show_nickname(location)
@@ -16,17 +16,24 @@ module LocationsHelper
   end
   
   def show_address(location)
-    if current_page?(location_path(location))
-      render partial: "address", locals: { location: location }
-    end
+    
+    render partial: "locations/address", locals: { location: location }
   end
   
   def edit_delete_links(location)
     output = [
-      link_to("Edit", edit_location_path(location)),
-      link_to("Delete", location, method: :delete, data: { confirm: "Are you sure you really want to delete this location" })
+      link_to("Edit", edit_location_path(location), class: "btn btn-secondary"),
+      link_to("Delete", location, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you really want to delete this location" })
     ]
-    safe_join(output, ", ")
+    safe_join(output)
+  end
+  
+  def appointment_count(location)
+    link_to pluralize(location.appointment_count, 'appointment'), location_path(location)
+  end
+  
+  def client_count(location)
+    link_to pluralize(location.client_count, 'client'), client_list_path(location)
   end
   
   

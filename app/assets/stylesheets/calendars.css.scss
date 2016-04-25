@@ -147,7 +147,8 @@ td .quarter:nth-child(51):before {
 td .appointment {
     position: absolute;
     height: 1px;
-    width: 90.5%;
+    width: 74.5%;
+    margin-left: 16%;
     background: rgba(255, 192, 203, 0.85);
     content: " ";
     text-align: center;
@@ -171,19 +172,21 @@ td .appointment a {
 // Calendar Styles for Full Width Calendar Pages
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
-    .simple-calendar .appointment {
-        width: 88%;
+    .simple-calendar td .appointment {
+        width: 68%;
+        margin-left: 20%
     }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
-    .simple-calendar .appointment {
-        width: 85%;
+    .simple-calendar td .appointment {
+        width: 58%;
+        margin-left: 26%;
     }
 }
 
 @media screen and (max-width: 767px) {
-    .simple-calendar .appointment {
+    .simple-calendar td .appointment {
         width: 79%;
     }
 }
@@ -200,7 +203,9 @@ form#new_appointment, form.edit_appointment {
     }
 
     .col-md-8 .simple-calendar .appointment {
-        width: 85%;
+        width: 59%;
+        margin-left: 26%;
+        font-size: 60%;
     }
 }
 
@@ -209,7 +214,9 @@ form#new_appointment, form.edit_appointment {
         margin-top: 20px;
     }
     .col-md-8 .simple-calendar .appointment {
-        width: 81%;
+        width: 53%;
+        margin-left: 29%;
+        font-size: 60%;
     }
 }
 
