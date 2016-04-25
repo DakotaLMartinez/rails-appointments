@@ -1,6 +1,6 @@
 class Location < ActiveRecord::Base
   belongs_to :user
-  has_many :appointments 
+  has_many :appointments, dependent: :destroy
   has_many :clients, through: :appointments
   
   def client_count 
