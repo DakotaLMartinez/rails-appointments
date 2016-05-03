@@ -19,9 +19,9 @@ module AppointmentsFormHelper
   
   def appointment_date(appointment)
     if appointment.appointment_time
-      appointment.appointment_time.strftime("%m/%e/%Y")
+      appointment.appointment_time.strftime("%m/%d/%Y")
     else
-      Time.now.strftime("%m/%e/%Y")
+      Time.now.strftime("%m/%d/%Y")
     end
   end
   
@@ -57,15 +57,40 @@ module AppointmentsFormHelper
     appointment.appointment_time.strftime('%M') if appointment.appointment_time
   end
   
-  def duration_field(name, appointment)
+  def duration_hour_field(name, appointment)
     options = {
-      "30 minutes" => "1800",
-      "45 minutes"=> "2700",
-      "1 hour" => "3600",
-      "1 hour and 15 minutes" => "4500",
-      "1 hour and 30 minutes" => "5400"
+      "0 hr" => "0",
+      "1 hr" => "3600",
+      "2 hr" => "7200", 
+      "3 hr" => "10800"
     }
-    select_tag(name, options_for_select(options, appointment.duration))
+    select_tag(name, options_for_select(options, get_duration_hour(appointment.duration) ) )
+  end
+  
+  def duration_minute_field(name, appointment)
+    options = {
+      "00 min" => "0",
+      "15 min" => "900", 
+      "30 min" => "1800", 
+      "45 min" => "2700"
+    }
+    select_tag(name, options_for_select(options, get_duration_min(appointment.duration) ) )
+  end
+  
+  def get_duration_hour(seconds)
+    if seconds 
+      ((seconds/3600)*3600)
+    else 
+      "0"
+    end
+  end
+  
+  def get_duration_min(seconds)
+    if seconds 
+      (seconds % 3600)
+    else 
+      "1800"
+    end
   end
   
   def float_two_decimals(price)

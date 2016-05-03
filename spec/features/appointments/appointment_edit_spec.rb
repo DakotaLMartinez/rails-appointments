@@ -14,7 +14,8 @@ feature "Appointment Edit", :devise do
     fill_in "appointment_appointment_time_date", with: four_days_later.strftime("%Y-%m-%d")
     select "6 PM", from: "appointment_appointment_time_hour"
     select "30", from: "appointment_appointment_time_min"
-    select "1 hour and 30 minutes", from: "appointment_duration"
+    select "1 hr", from: "appointment_duration_hour"
+    select "30 min", from: "appointment_duration_min"
     fill_in "appointment_price", with: 100
     click_button "Update Appointment" 
     visit appointment_path(new_appointment)

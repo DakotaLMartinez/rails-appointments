@@ -18,21 +18,15 @@ class Appointment < ActiveRecord::Base
     client.name
   end
   
-  def client_attributes=(atts)
-    if atts[:name] != ""
-      self.client = self.user.clients.find_or_create_by(atts)   
-    end
-  end
-  
   def location_name 
     location.nickname if location
   end
   
-  def appointment_time=(time)
-    if time.is_a?(Hash)
-      write_attribute(:appointment_time, parse_datetime(time) ) 
-    else
-      write_attribute(:appointment_time, time)
+  ## Form Parsing methods
+  
+  def client_attributes=(atts)
+    if atts[:name] != ""
+      self.client = self.user.clients.find_or_create_by(atts)   
     end
   end
   
@@ -43,6 +37,14 @@ class Appointment < ActiveRecord::Base
     end
   end
   
+  def appointment_time=(time)
+    if time.is_a?(Hash)
+      self[:appointment_time] = parse_datetime(time) 
+    else
+      self[:appointment_time] = time
+    end
+  end
+  
   def parse_date(string)
     array = string.split("/")
     first_item = array.pop
@@ -50,7 +52,19 @@ class Appointment < ActiveRecord::Base
   end
   
   def parse_datetime(hash)
-    Time.zone.parse(parse_date(hash["date"]) + " " + hash["hour"] + ":" + hash["min"])
+    Time.zone.parse("#{parse_date(hash["date"])} #{hash["hour"]}:#{hash["min"]}")
+  end
+  
+  def duration=(duration) 
+    if duration.is_a?(Hash)
+      self[:duration] = parse_duration(duration)
+    else 
+      self[:duration] = duration
+    end
+  end
+  
+  def parse_duration(hash)
+    hash["hour"].to_i + hash["min"].to_i
   end
   
   ## Validations 

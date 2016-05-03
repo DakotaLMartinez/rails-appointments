@@ -9,7 +9,7 @@ feature "Appointment Nested Routes", :devise do
     signin(user.email, user.password)
     new_client = user.clients.create(name: "new client")
     visit new_client_appointment_path(new_client) 
-    fill_in "appointment[appointment_time][date]", with: tomorrow.strftime("%m/%e/%Y")
+    fill_in "appointment[appointment_time][date]", with: tomorrow.strftime("%m/%d/%Y")
     select "11 AM", from: "appointment_appointment_time_hour"
     click_button "Create Appointment"
     visit client_path(new_client)
@@ -22,7 +22,7 @@ feature "Appointment Nested Routes", :devise do
     signin(user.email, user.password)
     visit new_location_appointment_path(new_location)
     fill_in "appointment_client_attributes_name", with: "awesome new client"
-    fill_in "appointment_appointment_time_date", with: tomorrow.strftime("%m/%e/%Y")
+    fill_in "appointment_appointment_time_date", with: tomorrow.strftime("%m/%d/%Y")
     select "12 PM", from: "appointment_appointment_time_hour"
     click_button "Create Appointment"
     visit location_path(new_location)
