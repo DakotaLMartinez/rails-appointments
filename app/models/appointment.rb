@@ -52,7 +52,9 @@ class Appointment < ActiveRecord::Base
   end
   
   def parse_datetime(hash)
-    Time.zone.parse("#{parse_date(hash["date"])} #{hash["hour"]}:#{hash["min"]}")
+    if hash["date"].match(/\d{2}\/\d{2}\/\d{4}/)
+      Time.zone.parse("#{parse_date(hash["date"])} #{hash["hour"]}:#{hash["min"]}")
+    end
   end
   
   def duration=(duration) 
@@ -70,9 +72,15 @@ class Appointment < ActiveRecord::Base
   ## Validations 
   
   validates :duration, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :appointment_time, presence: true 
+  validates :appointment_time, presence: { message: "must be a valid date" }
   validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true 
   validates :client_id, presence: true
+  
+  validate :time_still_valid
+  
+  def time_still_valid
+    AppointmentTimeValidator.new(self).validate
+  end
   
   include ActiveModel::Validations 
   
@@ -83,22 +91,26 @@ class Appointment < ActiveRecord::Base
     end
     
     def validate 
-      # selects the user's appointments from yesterday, 
-      # today and tomorrow
-      appointments = @user.appointments.select { |a| a.appointment_time.midnight == @appointment.appointment_time.midnight || a.appointment_time.midnight == @appointment.appointment_time - 1.day || a.appointment_time.midnight == @appointment.appointment_time + 1.day }
-      # makes sure that current appointments don't overlap
-      # first checks if an existing appointment is still
-      # in progress when the new appointment is set to start
-      # next checks if the new appointment would still be in 
-      # progress when an existing appointment is set to start
-      appointments.each do |appointment| 
-        if @appointment != appointment 
-          if appointment.appointment_time <= @appointment.appointment_time && @appointment.appointment_time <= appointment.end_time || @appointment.appointment_time <= appointment.appointment_time && appointment.appointment_time <= @appointment.end_time
-            @appointment.errors.add(:appointment_time, "is not available.")
+      if @appointment.appointment_time
+        # selects the user's appointments from yesterday, 
+        # today and tomorrow
+        appointments = @user.appointments.select { |a| a.appointment_time.midnight == @appointment.appointment_time.midnight || a.appointment_time.midnight == @appointment.appointment_time - 1.day || a.appointment_time.midnight == @appointment.appointment_time + 1.day }
+        # makes sure that current appointments don't overlap
+        # first checks if an existing appointment is still
+        # in progress when the new appointment is set to start
+        # next checks if the new appointment would still be in 
+        # progress when an existing appointment is set to start
+        appointments.each do |appointment| 
+          if @appointment != appointment 
+            if appointment.appointment_time <= @appointment.appointment_time && @appointment.appointment_time <= appointment.end_time || @appointment.appointment_time <= appointment.appointment_time && appointment.appointment_time <= @appointment.end_time
+              @appointment.errors.add(:appointment_time, "is not available.")
+            end
           end
         end
       end
+      
     end
+    
   end
   
   validate do |appointment| 

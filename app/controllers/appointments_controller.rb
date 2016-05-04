@@ -36,6 +36,7 @@ class AppointmentsController < ApplicationController
     if @appointment.update(appointment_params)
       redirect_to appointments_path
     else 
+      set_appointments
       render :edit
     end
   end
