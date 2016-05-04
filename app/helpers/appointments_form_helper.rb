@@ -45,7 +45,11 @@ module AppointmentsFormHelper
   end
   
   def appointment_hour(appointment)
-    appointment.appointment_time.strftime('%l %p').strip if appointment.appointment_time
+    if appointment.appointment_time
+      appointment.appointment_time.strftime('%l %p').strip 
+    else
+      "8 AM"
+    end
   end
   
   def min_selector(name, appointment)
@@ -54,7 +58,11 @@ module AppointmentsFormHelper
   end 
   
   def appointment_min(appointment)
-    appointment.appointment_time.strftime('%M') if appointment.appointment_time
+    if appointment.appointment_time
+      appointment.appointment_time.strftime('%M') 
+    else
+      "00"
+    end
   end
   
   def duration_hour_field(name, appointment)
@@ -64,7 +72,7 @@ module AppointmentsFormHelper
       "2 hr" => "7200", 
       "3 hr" => "10800"
     }
-    select_tag(name, options_for_select(options, get_duration_hour(appointment.duration) ) )
+    select_tag(name, options_for_select(options, get_duration_hour(appointment) ) )
   end
   
   def duration_minute_field(name, appointment)
@@ -74,22 +82,22 @@ module AppointmentsFormHelper
       "30 min" => "1800", 
       "45 min" => "2700"
     }
-    select_tag(name, options_for_select(options, get_duration_min(appointment.duration) ) )
+    select_tag(name, options_for_select(options, get_duration_min(appointment) ) )
   end
   
-  def get_duration_hour(seconds)
-    if seconds 
-      ((seconds/3600)*3600)
+  def get_duration_hour(appointment)
+    if appointment.duration 
+      ((appointment.duration/3600)*3600)
     else 
-      "0"
+      0
     end
   end
   
-  def get_duration_min(seconds)
-    if seconds 
-      (seconds % 3600)
+  def get_duration_min(appointment)
+    if appointment.duration 
+      (appointment.duration % 3600)
     else 
-      "1800"
+      1800
     end
   end
   

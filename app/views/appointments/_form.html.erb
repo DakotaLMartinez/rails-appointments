@@ -24,7 +24,7 @@
   <div class="field">
     <p>
       <%= f.label :price %> 
-      <%= f.number_field :price, value: float_two_decimals(appointment.price) %>
+      <%= f.number_field :price, step: 0.25, value: float_two_decimals(appointment.price) %>
     </p>  
   </div>
   <%= location_fields(f, appointment, location) %>
