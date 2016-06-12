@@ -21,7 +21,7 @@ module AppointmentsFormHelper
     if appointment.appointment_time
       appointment.appointment_time.strftime("%m/%d/%Y")
     else
-      Time.now.strftime("%m/%d/%Y")
+      Time.zone.now.strftime("%m/%d/%Y")
     end
   end
   

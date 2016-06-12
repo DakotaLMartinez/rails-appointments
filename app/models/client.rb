@@ -8,7 +8,7 @@ class Client < ActiveRecord::Base
   end
   
   def appointment_count
-    appointments.count
+    @appointment_count ||= appointments.count
   end
   
   ## Validations 
