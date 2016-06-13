@@ -32,6 +32,10 @@ module LocationsHelper
     link_to pluralize(location.appointment_count, 'appointment'), location_path(location)
   end
   
+  def location_value(location)
+    number_to_currency(location.value) if location.value != 0
+  end
+  
   def client_count(location)
     link_to pluralize(location.client_count, 'client'), client_list_path(location)
   end

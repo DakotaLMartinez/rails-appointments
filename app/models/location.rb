@@ -11,5 +11,9 @@ class Location < ActiveRecord::Base
     appointments.count
   end
   
+  def value
+    appointments.collect { |a| a.price }.compact.inject(0, :+)
+  end
+  
   validates :nickname, presence: true
 end
