@@ -1,10 +1,10 @@
 <div class="location row">
   <div class="col-sm-3">
-    <h4><%= show_nickname(location) %></h4>
+    <p class="name"><%= show_nickname(location) %></p>
     <p><%= edit_delete_links(location) %></p>
   </div>  
   <div class="col-sm-3">
-    <p><%= show_address(location) %></p>
+    <%= show_address(location) %>
   </div>
   <div class="col-sm-3">
     <p><%= client_count(location) %></p>
