@@ -22,7 +22,7 @@ module AppointmentsCalendarHelper
   end
   
   def appointment_text(appointment)
-    "<span class='name'>#{appointment.client_name}</span>#{at_location(appointment)}".html_safe
+    "<strong class=\"name\">#{appointment.client_name}</strong> #{at_location(appointment)}".html_safe
   end
   
   def from_to(appointment)

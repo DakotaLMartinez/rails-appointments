@@ -27,12 +27,10 @@
               <% 52.times do %>
                 <div class="quarter"></div>
               <% end %>
-              <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(block) %>
-                <% capture_haml do %>
-                  <% block.call day, sorted_events.fetch(day, []) %>
-                <% end %>
+              <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
+                <% capture_haml(day, sorted_events.fetch(day, []), &passed_block) %>
               <% else %>
-                <% block.call day, sorted_events.fetch(day, []) %>
+                <% passed_block.call day, sorted_events.fetch(day, []) %>
               <% end %>
             <% end %>
           <% end %>

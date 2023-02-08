@@ -13,15 +13,18 @@
 
 ActiveRecord::Schema.define(version: 20160420012901) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "appointments", force: :cascade do |t|
     t.datetime "appointment_time"
-    t.integer  "duration",         limit: 4
-    t.float    "price",            limit: 24
-    t.integer  "location_id",      limit: 4
-    t.integer  "user_id",          limit: 4
-    t.integer  "client_id",        limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "duration"
+    t.float    "price"
+    t.integer  "location_id"
+    t.integer  "user_id"
+    t.integer  "client_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_index "appointments", ["client_id"], name: "index_appointments_on_client_id", using: :btree
@@ -29,45 +32,45 @@ ActiveRecord::Schema.define(version: 20160420012901) do
   add_index "appointments", ["user_id"], name: "index_appointments_on_user_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.string   "phone_number", limit: 255
-    t.string   "email",        limit: 255
-    t.integer  "user_id",      limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "name"
+    t.string   "phone_number"
+    t.string   "email"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
-    t.string   "nickname",       limit: 255
-    t.string   "city",           limit: 255
-    t.string   "street_address", limit: 255
-    t.string   "state",          limit: 255
-    t.string   "zipcode",        limit: 255
-    t.string   "business_name",  limit: 255
-    t.integer  "user_id",        limit: 4
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "nickname"
+    t.string   "city"
+    t.string   "street_address"
+    t.string   "state"
+    t.string   "zipcode"
+    t.string   "business_name"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "locations", ["user_id"], name: "index_locations_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.string   "provider",               limit: 255
-    t.string   "uid",                    limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
