@@ -15,7 +15,7 @@ gem 'net-http'
 
 gem 'puma'
 
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '>= 3.4.1'
 gem 'autoprefixer-rails'
 gem 'bootstrap_form'
 
