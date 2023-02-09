@@ -54,7 +54,6 @@ RSpec.describe Appointment, type: :model do
   context "associations" do 
     
     it "belongs to a location" do 
-      binding.pry
       expect(appointment1.location).to eq(santa_monica)
     end
     

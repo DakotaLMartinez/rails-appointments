@@ -47,7 +47,6 @@ RSpec.describe Location, type: :model do
     
     it "has many appointments" do
       [appointment1, appointment4]
-      binding.pry
       expect(santa_monica.appointments).to include(appointment1, appointment4)
     end
     

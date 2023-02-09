@@ -43,9 +43,6 @@ RSpec.describe Client, type: :model do
     
     it "has many locations through appointments" do 
       [appointment1, appointment2]
-      # axel.save 
-      # axel.reload 
-      # binding.pry
       expect(axel.locations).to include(santa_monica, culver_city)
     end
     
