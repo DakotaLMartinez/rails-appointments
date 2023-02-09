@@ -13,6 +13,8 @@ gem 'pg', '~> 1'
 gem 'sass-rails', '~> 5.0'
 gem 'net-http'
 
+gem 'puma'
+
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'autoprefixer-rails'
 gem 'bootstrap_form'
