@@ -69,3 +69,5 @@ end
 gem "jquery-rails", "~> 4.5"
 
 gem "coffee-rails", "~> 4.2"
+
+gem "omniauth-rails_csrf_protection", "~> 1.0"
