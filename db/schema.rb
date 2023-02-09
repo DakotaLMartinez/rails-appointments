@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2023_02_09_194119) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "appointments", force: :cascade do |t|
+  create_table "appointments", id: :serial, force: :cascade do |t|
     t.datetime "appointment_time"
     t.integer "duration"
     t.float "price"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2023_02_09_194119) do
     t.index ["user_id"], name: "index_appointments_on_user_id"
   end
 
-  create_table "clients", force: :cascade do |t|
+  create_table "clients", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "phone_number"
     t.string "email"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2023_02_09_194119) do
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
-  create_table "locations", force: :cascade do |t|
+  create_table "locations", id: :serial, force: :cascade do |t|
     t.string "nickname"
     t.string "city"
     t.string "street_address"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2023_02_09_194119) do
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
