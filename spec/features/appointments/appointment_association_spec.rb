@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "Appointments Associations Spec", :devise do 
   
   scenario "Users can create a new client through the New Appointment Form" do 
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     signin(user.email, user.password)
     today = Time.now.strftime("%m/%d/%Y")
     visit new_appointment_path
@@ -22,7 +22,7 @@ feature "Appointments Associations Spec", :devise do
   let(:tomorrow_at_ten) { DateTime.now.midnight + 34.hours }
   
   scenario "users can create new locations from the appointment form" do 
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     signin(user.email, user.password)
     new_client = user.clients.create(name: 'my new client')
     new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%m/%d/%Y"), "hour" => tomorrow_at_ten.strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)

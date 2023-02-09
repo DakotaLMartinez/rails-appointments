@@ -1,8 +1,8 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :appointment do
-    appointment_time "2016-04-20 01:29:01"
-    duration 1
-    price 1.5
+    appointment_time { {"date" => "12/12/2012", "hour" => "09", "min" => "30"} }
+    duration { 1 }
+    price { 1.5 }
     location nil
     user nil
     client nil

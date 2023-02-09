@@ -5,7 +5,7 @@ feature "Appointment Edit", :devise do
   let(:four_days_later) { DateTime.now.midnight + 18.hours + 4.days }
  
   scenario "users can edit appointments they created" do 
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     signin(user.email, user.password)
     new_client = user.clients.create(name: 'my new client')
     new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%m/%d/%Y"), "hour" => tomorrow_at_ten.strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
@@ -27,7 +27,7 @@ feature "Appointment Edit", :devise do
   end
   
   scenario "appointments should show the current time on the edit form" do 
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     signin(user.email, user.password)
     new_client = user.clients.create(name: 'my new client')
     new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%m/%d/%Y"), "hour" => (tomorrow_at_ten - 1.hour).strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
@@ -36,8 +36,8 @@ feature "Appointment Edit", :devise do
   end
   
   scenario "users can't edit appointments made by other users" do 
-    user = FactoryGirl.create(:user)
-    other_user = FactoryGirl.create(:user, email: "other@email.com")
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:user, email: "other@email.com")
     signin(user.email, user.password)
     new_client = user.clients.create(name: 'my new client')
     new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%m/%d/%Y"), "hour" => tomorrow_at_ten.strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)

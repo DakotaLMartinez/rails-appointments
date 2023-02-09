@@ -5,7 +5,7 @@ feature "Appointment Nested Routes", :devise do
   
   let(:tomorrow) { tomorrow = DateTime.now + 1.day }
   scenario "Users can create appointments for a particular client from a nested client route" do 
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     signin(user.email, user.password)
     new_client = user.clients.create(name: "new client")
     visit new_client_appointment_path(new_client) 
@@ -17,7 +17,7 @@ feature "Appointment Nested Routes", :devise do
   end
   
   scenario "Users can create appointments for a particular location from a nested location route" do 
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     new_location = user.locations.create(nickname: 'my awesome new location')
     signin(user.email, user.password)
     visit new_location_appointment_path(new_location)

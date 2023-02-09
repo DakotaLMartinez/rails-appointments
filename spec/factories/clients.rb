@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :client do
-    name "MyString"
-    phone_number "MyString"
-    email "MyString"
+    name {"MyString"}
+    phone_number {"MyString"}
+    email {"MyString"}
   end
 end

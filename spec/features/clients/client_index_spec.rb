@@ -9,7 +9,7 @@ feature 'Client Index', :devise do
   
   # Scenario: User creates a new client and can see them on the index page
   scenario 'Users can see clients they have created' do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     signin(user.email, user.password)
     visit new_client_path 
     fill_in 'client_name', with: "my new client"
@@ -24,8 +24,8 @@ feature 'Client Index', :devise do
   end
   
   scenario 'Users cannot see clients created by other users' do
-    user = FactoryGirl.create(:user)
-    other_user = FactoryGirl.create(:user, email: 'other@email.com')
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:user, email: 'other@email.com')
     signin(other_user.email, other_user.password)
     visit new_client_path 
     fill_in 'client_name', with: "my private client"

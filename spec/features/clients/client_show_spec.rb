@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Client Show', :devise do
   
   scenario 'user can see clients they created' do 
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     signin(user.email, user.password)
     new_client = user.clients.create(name: "my new client", email: "my@email.com", phone_number: "(310) 111-2222")
     visit client_path(new_client)
@@ -13,8 +13,8 @@ feature 'Client Show', :devise do
   end
   
   scenario "user cannot see another user's clients" do 
-    user = FactoryGirl.create(:user)
-    other_user = FactoryGirl.create(:user, email: 'other@email.com')
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:user, email: 'other@email.com')
     signin(user.email, user.password)
     new_client = user.clients.create(name: "my new client", email: "my@email.com", phone_number: "(310) 111-2222")
     click_link "Sign out"

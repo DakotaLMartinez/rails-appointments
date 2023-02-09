@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "Location Edit", :devise do
   
   scenario "Users can edit locations they created" do 
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     new_location = user.locations.create(nickname: "Home!")
     signin(user.email, user.password)
     visit edit_location_path(new_location)
@@ -24,9 +24,9 @@ feature "Location Edit", :devise do
   end
   
   scenario "Users can't edit locations created by other users" do 
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     new_location = user.locations.create(nickname: "Home!")
-    other_user = FactoryGirl.create(:user, email: "other@email.com")
+    other_user = FactoryBot.create(:user, email: "other@email.com")
     signin(other_user.email, other_user.password)
     visit edit_location_path(new_location)
     expect(page.current_path).to eq(locations_path)

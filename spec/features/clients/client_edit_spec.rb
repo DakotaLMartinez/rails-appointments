@@ -3,7 +3,7 @@ require "rails_helper"
 feature "Client Edit", :devise do 
   
   scenario 'users can edit clients they created' do 
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     signin(user.email, user.password)
     new_client = user.clients.create(name: "my new client")
     visit edit_client_path(new_client)
@@ -14,8 +14,8 @@ feature "Client Edit", :devise do
   end
   
   scenario "users cannot edit other user's clients" do 
-    user = FactoryGirl.create(:user)
-    other_user = FactoryGirl.create(:user, email: "other@email.com")
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:user, email: "other@email.com")
     signin(user.email, user.password)
     new_client = user.clients.create(name: "my new client")
     visit edit_client_path(new_client)
