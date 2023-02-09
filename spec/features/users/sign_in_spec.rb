@@ -13,7 +13,7 @@ feature 'Sign in', :devise do
   scenario 'user cannot sign in if not registered' do
 
     signin('test@example.com', 'please123')
-    expect(page).to have_content I18n.t 'devise.failure.not_found_in_database', authentication_keys: 'email'
+    expect(page).to have_content I18n.t 'devise.failure.not_found_in_database', authentication_keys: 'Email'
   end
 
   # Scenario: User can sign in with valid credentials
@@ -35,7 +35,7 @@ feature 'Sign in', :devise do
   scenario 'user cannot sign in with wrong email' do
     user = FactoryGirl.create(:user)
     signin('invalid@email.com', user.password)
-    expect(page).to have_content I18n.t 'devise.failure.not_found_in_database', authentication_keys: 'email'
+    expect(page).to have_content I18n.t 'devise.failure.not_found_in_database', authentication_keys: 'Email'
   end
 
   # Scenario: User cannot sign in with wrong password
@@ -46,7 +46,7 @@ feature 'Sign in', :devise do
   scenario 'user cannot sign in with wrong password' do
     user = FactoryGirl.create(:user)
     signin(user.email, 'invalidpass')
-    expect(page).to have_content I18n.t 'devise.failure.invalid', authentication_keys: 'email'
+    expect(page).to have_content I18n.t 'devise.failure.invalid', authentication_keys: 'Email'
   end
 
 end

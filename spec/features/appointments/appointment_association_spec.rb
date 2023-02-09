@@ -25,7 +25,7 @@ feature "Appointments Associations Spec", :devise do
     user = FactoryGirl.create(:user)
     signin(user.email, user.password)
     new_client = user.clients.create(name: 'my new client')
-    new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%Y-%m-%d"), "hour" => tomorrow_at_ten.strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
+    new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%m/%d/%Y"), "hour" => tomorrow_at_ten.strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
     visit edit_appointment_path(new_appointment)
     fill_in "appointment_location_attributes_nickname", with: "my new awesome home"
     click_button "Update Appointment"

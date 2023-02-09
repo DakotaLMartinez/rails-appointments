@@ -8,16 +8,17 @@ feature "Appointment Edit", :devise do
     user = FactoryGirl.create(:user)
     signin(user.email, user.password)
     new_client = user.clients.create(name: 'my new client')
-    new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%Y-%m-%d"), "hour" => tomorrow_at_ten.strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
+    new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%m/%d/%Y"), "hour" => tomorrow_at_ten.strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
     visit edit_appointment_path(new_appointment)
     fill_in "appointment_client_attributes_name", with: "my edited client"
-    fill_in "appointment_appointment_time_date", with: four_days_later.strftime("%Y-%m-%d")
+    fill_in "appointment_appointment_time_date", with: four_days_later.strftime("%m/%d/%Y")
     select "6 PM", from: "appointment_appointment_time_hour"
     select "30", from: "appointment_appointment_time_min"
     select "1 hr", from: "appointment_duration_hour"
     select "30 min", from: "appointment_duration_min"
     fill_in "appointment_price", with: 100
     click_button "Update Appointment" 
+    new_appointment.reload
     visit appointment_path(new_appointment)
     expect(page).to have_content("my edited client")
     expect(page).to have_content("6:30 PM")
@@ -29,7 +30,7 @@ feature "Appointment Edit", :devise do
     user = FactoryGirl.create(:user)
     signin(user.email, user.password)
     new_client = user.clients.create(name: 'my new client')
-    new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%Y-%m-%d"), "hour" => (tomorrow_at_ten - 1.hour).strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
+    new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%m/%d/%Y"), "hour" => (tomorrow_at_ten - 1.hour).strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
     visit edit_appointment_path(new_appointment)
     expect( find(:css, 'select#appointment_appointment_time_hour').value ).to eq("9")
   end
@@ -39,7 +40,7 @@ feature "Appointment Edit", :devise do
     other_user = FactoryGirl.create(:user, email: "other@email.com")
     signin(user.email, user.password)
     new_client = user.clients.create(name: 'my new client')
-    new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%Y-%m-%d"), "hour" => tomorrow_at_ten.strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
+    new_appointment = user.appointments.create(appointment_time: { "date" => tomorrow_at_ten.strftime("%m/%d/%Y"), "hour" => tomorrow_at_ten.strftime("%l"), "min" => tomorrow_at_ten.strftime("%M") }, duration: 3600, price: 80, client: new_client)
     click_link "Sign out"
     signin(other_user.email, other_user.password)
     visit edit_appointment_path(new_appointment)
