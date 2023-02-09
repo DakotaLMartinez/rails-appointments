@@ -1,8 +1,11 @@
+def next?
+  File.basename(__FILE__) == "Gemfile.next"
+end
 source 'https://rubygems.org'
 
 gem 'omniauth-facebook'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.11'
+gem 'rails', '~> 5.0'
 gem 'dotenv-rails', groups: [:development, :test]
 # Use mysql as the database for Active Record
 gem 'pg', '~> 0.15'
@@ -26,6 +29,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 
+gem 'bootsnap', require: false
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -43,12 +48,14 @@ group :development do
   gem 'rails_layout'
   gem 'spring-commands-rspec'
   gem 'spring', '2.1.1'
+  gem 'listen'
 end
 group :development, :test do
   gem 'pry-nav'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails'
+  gem 'next_rails'
 end
 group :test do
   gem 'capybara'

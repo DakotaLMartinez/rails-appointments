@@ -12,7 +12,7 @@ require 'rails_helper'
 # end
 RSpec.describe AppointmentsFormHelper, :devise, type: :helper do
   let(:user) { User.create(email: "my@email.com", password: "mypassword") }
-  let(:tomorrow_at_nine) { DateTime.now.midnight + 33.hours }
+  let(:tomorrow_at_nine) { Time.zone.now.midnight + 33.hours }
   let(:new_client) { user.clients.create(name: 'my new client') }
   let(:new_appointment) { user.appointments.create(appointment_time: { "date" => tomorrow_at_nine.strftime("%m/%d/%Y"), "hour" => (tomorrow_at_nine).strftime("%l"), "min" => tomorrow_at_nine.strftime("%M") }, duration: 3600, price: 80, client: new_client) }
   let(:appointment_draft) { user.appointments.build }

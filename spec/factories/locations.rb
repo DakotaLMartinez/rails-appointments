@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :location do
-    nickname {"MyString"}
-    city {"MyString"}
-    street_address {"MyString"}
-    state {"MyString"}
-    zipcode {"MyString"}
-    business_name {"MyString"}
+    nickname {"Home"}
+    city {"LA"}
+    street_address {"555 Shangri-La"}
+    state {"California"}
+    zipcode {"90210"}
+    business_name {"Hotel California"}
   end
 end

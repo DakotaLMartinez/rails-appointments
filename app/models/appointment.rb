@@ -1,5 +1,5 @@
-class Appointment < ActiveRecord::Base
-  belongs_to :location
+class Appointment < ApplicationRecord
+  belongs_to :location, optional: true
   belongs_to :user
   belongs_to :client
   

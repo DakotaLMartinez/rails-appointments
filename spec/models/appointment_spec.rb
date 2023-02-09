@@ -11,9 +11,9 @@ RSpec.describe Appointment, type: :model do
   let(:tomorrow_at_two) { DateTime.now.midnight + 38.hours }
   let(:tomorrow_at_three) { DateTime.now.midnight + 39.hours }
   
-  let(:santa_monica) { Location.find_or_create_by(nickname: "Santa Monica Music", city: "Santa Monica", street_address: "1901 Santa Monica Blvd", state: "CA", zipcode: "90404", business_name: "Santa Monica Music Center") }
-  let(:culver_city) { Location.find_or_create_by(nickname: "Culver City Music", city: "Culver City", street_address: "10862 Washington Blvd", state: "CA", zipcode: "90232", business_name: "Culver City Music Center") }
-  let(:los_angeles) { Location.find_or_create_by(nickname: "Hurry Curry", city: "Los Angeles", street_address: "12825 Venice Blvd", state: "CA", zipcode: "90066", business_name: "Hurry Curry") }
+  let(:santa_monica) { Location.find_or_create_by(nickname: "Santa Monica Music", city: "Santa Monica", street_address: "1901 Santa Monica Blvd", state: "CA", zipcode: "90404", business_name: "Santa Monica Music Center", user: sandra) }
+  let(:culver_city) { Location.find_or_create_by(nickname: "Culver City Music", city: "Culver City", street_address: "10862 Washington Blvd", state: "CA", zipcode: "90232", business_name: "Culver City Music Center", user: sandra) }
+  let(:los_angeles) { Location.find_or_create_by(nickname: "Hurry Curry", city: "Los Angeles", street_address: "12825 Venice Blvd", state: "CA", zipcode: "90066", business_name: "Hurry Curry", user: sandra) }
   let(:starbucks) { Location.find_or_create_by(nickname: "Starbucks") }
   
   let(:sandra) { User.find_by(email: "sandra@sandra.com") || User.create(email: "sandra@sandra.com", password: "sandrapass") }
@@ -54,6 +54,7 @@ RSpec.describe Appointment, type: :model do
   context "associations" do 
     
     it "belongs to a location" do 
+      binding.pry
       expect(appointment1.location).to eq(santa_monica)
     end
     

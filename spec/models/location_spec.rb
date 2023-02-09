@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Location, type: :model do
-   let!(:santa_monica) { Location.find_or_create_by(nickname: "Santa Monica Music", city: "Santa Monica", street_address: "1901 Santa Monica Blvd", state: "CA", zipcode: "90404", business_name: "Santa Monica Music Center") }
+  let(:sandra) { User.find_by(email: "sandra@sandra.com") || User.create(email: "sandra@sandra.com", password: "sandrapass") }
+  let!(:santa_monica) { Location.find_or_create_by(nickname: "Santa Monica Music", city: "Santa Monica", street_address: "1901 Santa Monica Blvd", state: "CA", zipcode: "90404", business_name: "Santa Monica Music Center", user: sandra) }
    
    context "attributes" do 
     
@@ -36,7 +37,7 @@ RSpec.describe Location, type: :model do
     let(:tomorrow_at_ten) { DateTime.now.midnight + 34.hours }
     let(:two_days_later) { DateTime.now.midnight + 59.hours }
     
-    let(:sandra) { User.find_by(email: "sandra@sandra.com") || User.create(email: "sandra@sandra.com", password: "sandrapass") }
+    
     
     let(:axel) { Client.find_or_create_by(name: "Axel", phone_number: "(999) 999-9999", email: "axel@gmail.com", user_id: sandra.id) }
     let(:randy) { Client.find_or_create_by(name: "Randy", phone_number: "(444) 456-8172", email: "randydandy@hotmail.com", user_id: sandra.id) }
@@ -46,6 +47,7 @@ RSpec.describe Location, type: :model do
     
     it "has many appointments" do
       [appointment1, appointment4]
+      binding.pry
       expect(santa_monica.appointments).to include(appointment1, appointment4)
     end
     
