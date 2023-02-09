@@ -5,12 +5,13 @@ source 'https://rubygems.org'
 
 gem 'omniauth-facebook'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0'
+gem 'rails', '~> 6.0'
 gem 'dotenv-rails', groups: [:development, :test]
 # Use mysql as the database for Active Record
-gem 'pg', '~> 0.15'
+gem 'pg', '~> 1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'net-http'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'autoprefixer-rails'

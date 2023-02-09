@@ -25,7 +25,7 @@ class Client < ApplicationRecord
         record.errors.delete :user_id
       end
       if record.user_id && User.find_by(id: record.user_id).nil?
-        record.errors[:user_id] << "User not found."
+        record.errors.add(:user_id, "User not found")
       end
     end
   end
